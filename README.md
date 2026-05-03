@@ -8,13 +8,6 @@ Agent-grade MCP server for Obsidian vaults.
 
 A purpose-built [Model Context Protocol](https://modelcontextprotocol.io) server for Obsidian, designed for autonomous agent workflows. Atomic writes, backlink-aware moves, soft delete with trash, folder-aware operations, streaming reads, and structured errors that let agents recover.
 
-## Roadmap
-
-- **Phase 1 — Tier 1 (core):** `vault_read`, `vault_write`, `vault_patch`, `vault_move`, `vault_delete`, `vault_list`, `vault_create_folder`, `vault_delete_folder`, `vault_move_folder`.
-- **Phase 2 — Tier 2 (search & structure):** `vault_search`, `vault_links`, `vault_frontmatter`.
-- **Phase 3 — Tier 3 (advanced):** `vault_query`, `vault_diff`, `vault_snapshot`.
-- **Phase 4:** Open-source release.
-
 ## Configuration
 
 Create `~/.config/obsidian-mcp/config.json`:
