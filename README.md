@@ -2,7 +2,7 @@
 
 Agent-grade MCP server for Obsidian vaults.
 
-> **Status:** Phase 1, in progress. Tool surfaces are registered but not yet implemented.
+> **Status:** v0.3.0 — fully implemented, dogfooding before npm publish.
 
 ## What
 
@@ -22,7 +22,7 @@ Or set `OBSIDIAN_MCP_VAULT=/absolute/path/to/your/vault` in the environment to o
 
 ## Package name
 
-This package is intended to publish as `obsidian-mcp` on npm. If that name is unavailable at publish time, the fallback is `obsidian-agent-mcp`. The name is locked at first publish.
+Will publish as **`obsidian-agent-mcp`** on npm — the plain `obsidian-mcp` name is already taken by an unrelated package. The GitHub repo keeps the `obsidian-mcp` name.
 
 ## License
 
