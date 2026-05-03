@@ -16,6 +16,9 @@ import { registerVaultSearch } from "./vault_search.js";
 import { registerVaultDiff } from "./vault_diff.js";
 import { registerVaultSnapshot } from "./vault_snapshot.js";
 import { registerVaultQuery } from "./vault_query.js";
+import { registerVaultReadMultiple } from "./vault_read_multiple.js";
+import { registerVaultStats } from "./vault_stats.js";
+import { registerVaultTags } from "./vault_tags.js";
 
 export function registerAllTools(server: McpServer, config: Config): void {
   registerVaultRead(server, config);
@@ -34,4 +37,7 @@ export function registerAllTools(server: McpServer, config: Config): void {
   registerVaultDiff(server, config);
   registerVaultSnapshot(server, config);
   registerVaultQuery(server, config);
+  registerVaultReadMultiple(server, config);
+  registerVaultStats(server, config);
+  registerVaultTags(server, config);
 }
