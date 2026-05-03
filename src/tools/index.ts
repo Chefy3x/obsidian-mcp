@@ -13,6 +13,9 @@ import { registerVaultDeleteFolder } from "./vault_delete_folder.js";
 import { registerVaultLinks } from "./vault_links.js";
 import { registerVaultFrontmatter } from "./vault_frontmatter.js";
 import { registerVaultSearch } from "./vault_search.js";
+import { registerVaultDiff } from "./vault_diff.js";
+import { registerVaultSnapshot } from "./vault_snapshot.js";
+import { registerVaultQuery } from "./vault_query.js";
 
 export function registerAllTools(server: McpServer, config: Config): void {
   registerVaultRead(server, config);
@@ -28,4 +31,7 @@ export function registerAllTools(server: McpServer, config: Config): void {
   registerVaultLinks(server, config);
   registerVaultFrontmatter(server, config);
   registerVaultSearch(server, config);
+  registerVaultDiff(server, config);
+  registerVaultSnapshot(server, config);
+  registerVaultQuery(server, config);
 }
