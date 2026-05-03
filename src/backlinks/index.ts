@@ -1,17 +1,19 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import matter from "gray-matter";
 import { parseLinks } from "./parse.js";
 import { atomicWriteFile } from "../atomic_write.js";
 
 const CACHE_DIR = ".obsidian-mcp-cache";
 const CACHE_FILE = "backlinks.json";
-const CACHE_VERSION = 1;
+const CACHE_VERSION = 2;
 
 interface FileEntry {
   mtimeMs: number;
   size: number;
   wikilinkBasenames: string[];
   markdownTargets: string[];
+  aliases: string[];
 }
 
 interface CacheData {
@@ -146,10 +148,23 @@ export class BacklinkIndex {
       path.posix.basename(targetPosix),
     ).toLowerCase();
 
+    const targetEntry = this.data.files[targetPosix];
+    const allTargetNames = new Set<string>([targetBaseLower]);
+    if (targetEntry) {
+      for (const a of targetEntry.aliases) allTargetNames.add(a);
+    }
+
     const sources: string[] = [];
     for (const [sourcePath, entry] of Object.entries(this.data.files)) {
       if (sourcePath === targetPosix) continue;
-      if (entry.wikilinkBasenames.includes(targetBaseLower)) {
+      let matched = false;
+      for (const wikiName of entry.wikilinkBasenames) {
+        if (allTargetNames.has(wikiName)) {
+          matched = true;
+          break;
+        }
+      }
+      if (matched) {
         sources.push(sourcePath);
         continue;
       }
@@ -158,6 +173,20 @@ export class BacklinkIndex {
       }
     }
     return sources;
+  }
+
+  wikilinkResolutionMap(): Map<string, string[]> {
+    const map = new Map<string, string[]>();
+    for (const [relPath, entry] of Object.entries(this.data.files)) {
+      const baseLower = stripExt(path.posix.basename(relPath)).toLowerCase();
+      const names = [baseLower, ...entry.aliases];
+      for (const name of names) {
+        const list = map.get(name);
+        if (list) list.push(relPath);
+        else map.set(name, [relPath]);
+      }
+    }
+    return map;
   }
 
   forget(relPath: string): void {
@@ -204,7 +233,27 @@ function parseFileEntry(
     size: stat.size,
     wikilinkBasenames,
     markdownTargets,
+    aliases: extractAliases(content),
   };
+}
+
+function extractAliases(content: string): string[] {
+  let data: Record<string, unknown>;
+  try {
+    data = matter(content).data as Record<string, unknown>;
+  } catch {
+    return [];
+  }
+  const raw = data.aliases ?? data.alias;
+  if (Array.isArray(raw)) {
+    return raw
+      .filter((x): x is string => typeof x === "string")
+      .map((x) => x.toLowerCase());
+  }
+  if (typeof raw === "string") {
+    return [raw.toLowerCase()];
+  }
+  return [];
 }
 
 function stripExt(name: string): string {

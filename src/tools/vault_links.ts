@@ -100,14 +100,7 @@ export function registerVaultLinks(server: McpServer, config: Config): void {
       const brokenForwardLinks: Array<{ target: string; kind: "wikilink" | "markdown" }> = [];
 
       if (isMd) {
-        const allFiles = index.allMdFiles();
-        const basenameMap = new Map<string, string[]>();
-        for (const f of allFiles) {
-          const baseLower = stripExt(path.posix.basename(f)).toLowerCase();
-          const list = basenameMap.get(baseLower);
-          if (list) list.push(f);
-          else basenameMap.set(baseLower, [f]);
-        }
+        const basenameMap = index.wikilinkResolutionMap();
 
         const content = await fs.readFile(absPath, "utf8");
         const links = parseLinks(content);

@@ -19,6 +19,10 @@ import { registerVaultQuery } from "./vault_query.js";
 import { registerVaultReadMultiple } from "./vault_read_multiple.js";
 import { registerVaultStats } from "./vault_stats.js";
 import { registerVaultTags } from "./vault_tags.js";
+import { registerVaultOutline } from "./vault_outline.js";
+import { registerVaultResolveEmbeds } from "./vault_resolve_embeds.js";
+import { registerVaultObsidianUrl } from "./vault_obsidian_url.js";
+import { registerVaultBatch } from "./vault_batch.js";
 
 export function registerAllTools(server: McpServer, config: Config): void {
   registerVaultRead(server, config);
@@ -40,4 +44,8 @@ export function registerAllTools(server: McpServer, config: Config): void {
   registerVaultReadMultiple(server, config);
   registerVaultStats(server, config);
   registerVaultTags(server, config);
+  registerVaultOutline(server, config);
+  registerVaultResolveEmbeds(server, config);
+  registerVaultObsidianUrl(server, config);
+  registerVaultBatch(server, config);
 }
