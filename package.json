@@ -9,11 +9,31 @@
   },
   "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "skills"
   ],
   "engines": {
     "node": ">=20"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Chefy3x/obsidian-mcp.git"
+  },
+  "homepage": "https://github.com/Chefy3x/obsidian-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/Chefy3x/obsidian-mcp/issues"
+  },
+  "keywords": [
+    "obsidian",
+    "mcp",
+    "model-context-protocol",
+    "agents",
+    "vault",
+    "notes",
+    "knowledge-base",
+    "anthropic",
+    "claude"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",

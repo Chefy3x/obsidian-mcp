@@ -198,4 +198,4 @@ These are intrinsic limits of a stdio MCP server, not bugs:
 - **Cannot stream change notifications.** No filesystem watching; agents must poll if they need to react to external changes.
 - **Cannot sync.** Use Obsidian Sync, iCloud, or git separately.
 
-Open-source: https://github.com/[user]/obsidian-mcp (placeholder; update on publish)
+Open-source: https://github.com/Chefy3x/obsidian-mcp
