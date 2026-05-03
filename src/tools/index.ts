@@ -10,6 +10,9 @@ import { registerVaultReindex } from "./vault_reindex.js";
 import { registerVaultMove } from "./vault_move.js";
 import { registerVaultMoveFolder } from "./vault_move_folder.js";
 import { registerVaultDeleteFolder } from "./vault_delete_folder.js";
+import { registerVaultLinks } from "./vault_links.js";
+import { registerVaultFrontmatter } from "./vault_frontmatter.js";
+import { registerVaultSearch } from "./vault_search.js";
 
 export function registerAllTools(server: McpServer, config: Config): void {
   registerVaultRead(server, config);
@@ -22,4 +25,7 @@ export function registerAllTools(server: McpServer, config: Config): void {
   registerVaultMove(server, config);
   registerVaultMoveFolder(server, config);
   registerVaultDeleteFolder(server, config);
+  registerVaultLinks(server, config);
+  registerVaultFrontmatter(server, config);
+  registerVaultSearch(server, config);
 }

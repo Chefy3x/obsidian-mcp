@@ -171,6 +171,10 @@ export class BacklinkIndex {
   size(): number {
     return Object.keys(this.data.files).length;
   }
+
+  allMdFiles(): string[] {
+    return Object.keys(this.data.files);
+  }
 }
 
 function parseFileEntry(
